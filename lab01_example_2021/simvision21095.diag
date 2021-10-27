@@ -1,0 +1,84 @@
+*** Message Type: info ***
+When: Mon Oct 25 12:46:19 CEST 2021
+SimVision started.
+Version: TOOL:  simvision       19.09-s003
+User: nmalota
+Host: cadence33
+Platform: Linux/x86_64/2.6.32-754.33.1.el6.x86_64
+Started: Mon Oct 25 12:46:19 CEST 2021
+Command: /cad/XCELIUM1909/tools.lnx86/simvision/bin/simvision.exe -connect dc:cadence33:37804 -nocopyright
+Work Directory: /home/student/nmalota/VDIC/lab01/lab01_example_2021
+ 
+*** Message Type: info ***
+When: Mon Oct 25 12:46:19 CEST 2021
+Create browser window: "Design Browser 1"
+ 
+*** Message Type: info ***
+When: Mon Oct 25 12:46:21 CEST 2021
+Create console window: "Console"
+ 
+*** Message Type: info ***
+When: Mon Oct 25 12:46:24 CEST 2021
+Connect to Simulator
+      Design: worklib.top:sv
+   Languages: verilog vhdl assertion
+   Simulator: XM-Sim
+     Version: TOOL:      xmsim   19.09-s003
+        User: nmalota
+        Host: cadence33
+Time Started: Mon Oct 25 12:46:17 CEST 2021
+  Process ID: 21076
+   Directory: /home/student/nmalota/VDIC/lab01/lab01_example_2021
+     Command: xrun -F tb.f -v93 +nowarnDSEM2009 +nowarnDSEMEL +nowarnCGDEFN -xmlibdirname INCA_libs_gui +access+r +gui +overwrite -nocopyright -l xrun_gui.log
+
+ 
+*** Message Type: info ***
+When: Mon Oct 25 12:46:24 CEST 2021
+Create utility window: "Properties"
+ 
+*** Message Type: info ***
+When: Mon Oct 25 14:59:37 CEST 2021
+Exit XM-Sim: user
+      Design: worklib.top:sv
+   Languages: verilog vhdl assertion
+   Simulator: XM-Sim
+     Version: TOOL:      xmsim   19.09-s003
+        User: nmalota
+        Host: cadence33
+Time Started: Mon Oct 25 12:46:17 CEST 2021
+  Process ID: 21076
+   Directory: /home/student/nmalota/VDIC/lab01/lab01_example_2021
+     Command: xrun -F tb.f -v93 +nowarnDSEM2009 +nowarnDSEMEL +nowarnCGDEFN -xmlibdirname INCA_libs_gui +access+r +gui +overwrite -nocopyright -l xrun_gui.log
+
+ 
+*** Message Type: error ***
+When: Mon Oct 25 14:59:38 CEST 2021
+XM-Sim Crashed:
+      Design: worklib.top:sv
+   Languages: verilog vhdl assertion
+   Simulator: XM-Sim
+     Version: TOOL:      xmsim   19.09-s003
+        User: nmalota
+        Host: cadence33
+Time Started: Mon Oct 25 12:46:17 CEST 2021
+  Process ID: 21076
+   Directory: /home/student/nmalota/VDIC/lab01/lab01_example_2021
+     Command: xrun -F tb.f -v93 +nowarnDSEM2009 +nowarnDSEMEL +nowarnCGDEFN -xmlibdirname INCA_libs_gui +access+r +gui +overwrite -nocopyright -l xrun_gui.log
+      Design: worklib.top:sv
+   Languages: verilog vhdl assertion
+   Simulator: XM-Sim
+     Version: TOOL:    xmsim   19.09-s003
+        User: nmalota
+        Host: cadence33
+Time Started: Mon Oct 25 12:46:17 CEST 2021
+  Process ID: 21076
+   Directory: /home/student/nmalota/VDIC/lab01/lab01_example_2021
+     Command: xrun -F tb.f -v93 +nowarnDSEM2009 +nowarnDSEMEL +nowarnCGDEFN -xmlibdirname INCA_libs_gui +access+r +gui +overwrite -nocopyright -l xrun_gui.log
+
+Outstanding STRAP Requests:
+        strap::report enable out
+ 
+*** Message Type: info ***
+When: Mon Oct 25 14:59:43 CEST 2021
+SimVision Exit.
+ 

@@ -1,0 +1,68 @@
+TOOL:	xrun	19.09-s003: Started on Oct 07, 2021 at 15:52:36 CEST
+xrun
+	-elaborate
+	-l xrun_elaborate.log
+	-F tb.f
+		apple.sv
+		apple_tb.sv
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	-xmlibdirname INCA_libs_gui
+	+access+r
+	+gui
+	+overwrite
+	-nocopyright
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmelab: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		apple
+		apple_tb
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmvlog_cg: *W,DLCVAR (/home/student/nmalota/cds.lib,1): cds.lib Invalid environment variable ''.
+		worklib.apple:sv <0x1e8c24fa>
+			streams:   2, words:   220
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		        Instances  Unique
+		Modules:        2       2
+		Registers:      1       1
+		Scalar wires:   1       -
+		Always blocks:  1       1
+	Writing initial simulation snapshot: worklib.apple:sv
+TOOL:	xrun	19.09-s003: Exiting on Oct 07, 2021 at 15:52:36 CEST  (total: 00:00:00)
