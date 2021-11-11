@@ -1,0 +1,8 @@
+*.log
+*.history
+.dvt
+.simvision
+xcelium.d
+OK
+.project
+.reinvoke.sim

@@ -12,8 +12,6 @@ tb.f
 +nowarnDSEMEL
 +nowarnCGDEFN
 -xmlibdirname
-INCA_libs_gui
-+access+r
-+gui
+INCA_libs
 +overwrite
 -nocopyright
