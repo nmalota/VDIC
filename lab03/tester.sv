@@ -44,7 +44,7 @@ import alu_pkg::*;
 		bit correct;
 		correct = 1'($random);
 		if (correct)
-			return nextCRC4_D68({B,A,1'b1,op},0);
+			return nextCRC4_D68({bfm.B,bfm.A,1'b1,bfm.op},0);
 		else
 			return 4'($random);
 	endfunction : get_crc
@@ -54,27 +54,20 @@ import alu_pkg::*;
 	initial begin : tester
 		bfm.reset_alu();
 		repeat (10000) begin : tester_main
-			@(negedge clk);
+			@(negedge bfm.clk);
 			bfm.reset_alu();
-			op_set = get_op();
-			A      = get_data();
-			B      = get_data();
-			A_len  = get_len();
-			B_len  = get_len();
+			bfm.op_set = get_op();
+			bfm.A      = get_data();
+			bfm.B      = get_data();
+			bfm.A_len  = get_len();
+			bfm.B_len  = get_len();
 		    bfm.CRC_in = get_crc();
 			
-			bfm.send1data(A,B,op_set,A_len, B_len, bfm.CRC_in);
+			bfm.send1data(bfm.A,bfm.B,bfm.op_set,bfm.A_len, bfm.B_len, bfm.CRC_in);
 			bfm.get1data(bfm.C, bfm.FLAGS, bfm.CRC);
-			flag = 1'b1;
+			bfm.flag = 1'b1;
 //        	if($get_coverage() == 100) break;
 		end
 		$finish;
-	end : tester
-
-// Temporary. The scoreboard data will be later used.
-	final begin : finish_of_the_test
-		$display("Test %s.",test_result);
-	end
-//------------------------------------------------------------------------
-	
+	end : tester	
 endmodule : tester

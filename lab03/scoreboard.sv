@@ -1,7 +1,8 @@
 `timescale 1ns/1ps    
 module scoreboard(alu_bfm bfm);
 import alu_pkg::*;
-
+	
+	string             test_result = "PASSED";
 //------------------------------------------------------------------------------
 	function bit [31:0] get_expected(
 			bit [31:0] A,
@@ -37,61 +38,61 @@ function void get_expected_error(
 		
 		);
 	
-		expected_err_op=1'b0;
-		expected_err_data=1'b0;
-		expected_err_crc=1'b0;
+		bfm.expected_err_op=1'b0;
+		bfm.expected_err_data=1'b0;
+		bfm.expected_err_crc=1'b0;
 	
 		if((A_len != 3'd4) || (B_len != 3'd4))begin
-			expected_err_data = 1'b1;
+			bfm.expected_err_data = 1'b1;
 		end
-		else if(CRC_in != nextCRC4_D68({B,A,1'b1,op},0))begin
-			expected_err_crc = 1'b1;
+		else if(CRC_in != nextCRC4_D68({B,A,1'b1,bfm.op},0))begin
+			bfm.expected_err_crc = 1'b1;
 		end
 		else if(!op_set inside {3'b000, 3'b001, 3'b100, 3'b101}) begin
-			expected_err_op = 1'b1;
+			bfm.expected_err_op = 1'b1;
 		end	
 	endfunction
 
 initial 
 	forever begin : scoreboard 
-	@(negedge clk) 
-    if(flag) begin:verify_result
+	@(negedge bfm.clk) 
+    if(bfm.flag) begin:verify_result
 	    if (!bfm.ERROR)
 			begin
-				automatic bit [31:0] expected = get_expected(A, B, op_set);
+				automatic bit [31:0] expected = get_expected(bfm.A, bfm.B, bfm.op_set);
 				CHK_VALUE : assert(bfm.C === expected) begin
 						`ifdef DEBUG
 					$display("Test passed for A=%0d B=%0d op_set=%0d", A, B, op);
 						`endif
 				end
 				else begin
-					$display("Test FAILED for A=%0d B=%0d op_set=%0d", A, B, op);
+					$display("Test FAILED for A=%0d B=%0d op_set=%0d", bfm.A, bfm.B, bfm.op);
 					$display("Expected: %d  received: %d", expected, bfm.C);
 					test_result = "FAILED";
 				end;
 			end
 	    else begin
-		    get_expected_error(A, B, A_len, B_len, bfm.CRC_in, op_set);
-		    if(expected_err_data)
+		    get_expected_error(bfm.A, bfm.B, bfm.A_len, bfm.B_len, bfm.CRC_in, bfm.op_set);
+		    if(bfm.expected_err_data)
 			    CHK_ERR_DATA : assert(bfm.C[30:25] === 6'b100100)else begin
 					$display("Test FAILED - expected ERR_DATA");
 					$display("Received flags: %b", bfm.C[30:25]);
 				    test_result = "FAILED";
 				end
-		    else if(expected_err_crc)
+		    else if(bfm.expected_err_crc)
 			    CHK_ERR_CRC : assert(bfm.C[30:25] === 6'b010010)else begin
 					$display("Test FAILED - expected ERR_CRC");
 					$display("Received flags: %b", bfm.C[30:25]);
 				    test_result = "FAILED";
 			    end
-			else if(expected_err_op)
+			else if(bfm.expected_err_op)
 			    CHK_ERR_OP : assert(bfm.C[30:25] === 6'b001001)else begin
 					$display("Test FAILED - expected ERR_OP");
 					$display("Received flags: %b", bfm.C[30:25]);
 				    test_result = "FAILED";
 			    end
 	    end
-        flag = 1'b0;
+        bfm.flag = 1'b0;
     end
 	end 
 endmodule : scoreboard	

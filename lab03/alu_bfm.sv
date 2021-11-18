@@ -12,10 +12,20 @@ interface alu_bfm;
 	bit clk;
 	bit rst_n;
 	bit [31:0] C;
+	bit [31:0] A;
+	bit [31:0] B;
 	bit [3:0] FLAGS;
 	bit ERROR;
+	bit expected_err_data;
+	bit expected_err_op;
+	bit expected_err_crc;
 	bit [2:0] CRC;
 	bit [3:0] CRC_in;
+	bit				   flag;
+	bit [2:0] A_len;
+	bit [2:0] B_len;
+	wire        [2:0]  op;
+	operation_t        op_set;
 
 //------------------------------------------------------------------------------
 // Clock generator

@@ -7,22 +7,6 @@ package alu_pkg;
                           bad_op4 = 3'b111,
                           add_op  = 3'b100,
 				          sub_op  = 3'b101} operation_t;
-
-	bit         [31:0]  A;
-	bit         [31:0]  B;
-	bit                clk;
-	bit                rst_n;
-	bit				   flag;
-	bit                expected_err_data;
-	bit                expected_err_op;
-	bit                expected_err_crc;
-	bit [2:0] A_len;
-	bit [2:0] B_len;
-	wire        [2:0]  op;
-	operation_t        op_set;
-	
-	string             test_result = "PASSED";
-
 //------------------------------------------------------------------------------
 // CRC
 //------------------------------------------------------------------------------

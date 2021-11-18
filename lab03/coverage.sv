@@ -78,15 +78,15 @@ covergroup err_cov;
     option.name = "cg_err_cov";
     
     // #A4 Test operations with incorrect CRC
-    err_crc : coverpoint expected_err_crc {
+    err_crc : coverpoint bfm.expected_err_crc {
 	    bins C2_err_crc = {1'b1};
     }
     
     // #A3 Test operations with incorrect nr of data bits
-    err_data_A : coverpoint A_len {
+    err_data_A : coverpoint bfm.A_len {
 	    bins C3_inv_range_A[] = {[3'd0 : 3'd3]};
     }   
-    err_data_B : coverpoint B_len {
+    err_data_B : coverpoint bfm.B_len {
 	    bins C3_inv_range_B[] = {[3'd0 : 3'd3]};
     }
 
@@ -101,8 +101,8 @@ initial begin : coverage
     c_00_FF = new();
 	err_c	= new();
     forever begin : sample_cov
-        @(posedge clk);
-        if(flag || !rst_n) begin
+        @(posedge bfm.clk);
+        if(bfm.flag || !bfm.rst_n) begin
             oc.sample();
             c_00_FF.sample();
 	        err_c.sample();
