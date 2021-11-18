@@ -3,9 +3,7 @@ module coverage(alu_bfm bfm);
 import alu_pkg::*;
 bit         [31:0]  A;
 bit         [31:0]  B;
-wire        [2:0]  op;
-operation_t                op_set;
-assign op = op_set;
+operation_t         op_set;
 	
 covergroup op_cov;
 
@@ -103,6 +101,9 @@ initial begin : coverage
     forever begin : sample_cov
         @(posedge bfm.clk);
         if(bfm.flag || !bfm.rst_n) begin
+	        A      = bfm.A;
+	        B      = bfm.B;
+	        op_set = bfm.op_set;
             oc.sample();
             c_00_FF.sample();
 	        err_c.sample();

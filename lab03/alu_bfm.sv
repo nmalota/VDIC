@@ -16,8 +16,6 @@ interface alu_bfm;
 	bit [31:0] B;
 	bit [3:0] FLAGS;
 	bit ERROR;
-	bit expected_err_data;
-	bit expected_err_op;
 	bit expected_err_crc;
 	bit [2:0] CRC;
 	bit [3:0] CRC_in;
@@ -26,7 +24,8 @@ interface alu_bfm;
 	bit [2:0] B_len;
 	wire        [2:0]  op;
 	operation_t        op_set;
-
+	assign op = op_set;
+	string             test_result = "PASSED";
 //------------------------------------------------------------------------------
 // Clock generator
 //------------------------------------------------------------------------------

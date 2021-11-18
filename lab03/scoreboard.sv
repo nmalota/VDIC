@@ -3,6 +3,8 @@ module scoreboard(alu_bfm bfm);
 import alu_pkg::*;
 	
 	string             test_result = "PASSED";
+	bit expected_err_data;
+	bit expected_err_op;
 //------------------------------------------------------------------------------
 	function bit [31:0] get_expected(
 			bit [31:0] A,
@@ -38,18 +40,18 @@ function void get_expected_error(
 		
 		);
 	
-		bfm.expected_err_op=1'b0;
-		bfm.expected_err_data=1'b0;
+		expected_err_op=1'b0;
+		expected_err_data=1'b0;
 		bfm.expected_err_crc=1'b0;
 	
 		if((A_len != 3'd4) || (B_len != 3'd4))begin
-			bfm.expected_err_data = 1'b1;
+			expected_err_data = 1'b1;
 		end
 		else if(CRC_in != nextCRC4_D68({B,A,1'b1,bfm.op},0))begin
 			bfm.expected_err_crc = 1'b1;
 		end
 		else if(!op_set inside {3'b000, 3'b001, 3'b100, 3'b101}) begin
-			bfm.expected_err_op = 1'b1;
+			expected_err_op = 1'b1;
 		end	
 	endfunction
 
@@ -73,7 +75,7 @@ initial
 			end
 	    else begin
 		    get_expected_error(bfm.A, bfm.B, bfm.A_len, bfm.B_len, bfm.CRC_in, bfm.op_set);
-		    if(bfm.expected_err_data)
+		    if(expected_err_data)
 			    CHK_ERR_DATA : assert(bfm.C[30:25] === 6'b100100)else begin
 					$display("Test FAILED - expected ERR_DATA");
 					$display("Received flags: %b", bfm.C[30:25]);
@@ -85,7 +87,7 @@ initial
 					$display("Received flags: %b", bfm.C[30:25]);
 				    test_result = "FAILED";
 			    end
-			else if(bfm.expected_err_op)
+			else if(expected_err_op)
 			    CHK_ERR_OP : assert(bfm.C[30:25] === 6'b001001)else begin
 					$display("Test FAILED - expected ERR_OP");
 					$display("Received flags: %b", bfm.C[30:25]);
@@ -95,5 +97,10 @@ initial
         bfm.flag = 1'b0;
     end
 	end 
+		
+	// Temporary. The scoreboard data will be later used.
+	final begin : finish_of_the_test
+		$display("Test %s.",test_result);
+	end
 endmodule : scoreboard	
 	
