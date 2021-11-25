@@ -1,9 +1,0 @@
-rectangle 1.2 4
-rectangle 2 4
-rectangle 12.0 14
-square 3.3 0
-square 10 0
-square 0.10 0
-triangle 3 2.3 
-triangle 3 3
-triangle 13 13.1
