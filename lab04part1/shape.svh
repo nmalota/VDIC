@@ -1,26 +1,23 @@
-class shape;
+virtual class shape;
 	
 	real width;
 	real height;
 	
-	function new();
+	function new(real w, real h);
+		width = w;
+		height = h;
 	endfunction : new
 	
-	function real get_area();
-		$fatal(1,"Which shape's area do you want to calculate?");
-	endfunction : get_area
-	
-	function void print();
-		$fatal(1, "Which object type parameters do you want to print? ");
-	endfunction : print
+	pure virtual function real get_area();
+
+	pure virtual function void print();
 	
 endclass : shape
 
 class rectangle extends shape;
 	function new(real a, real b);
-		width = a;
-		height = b;
-	endfunction : new 
+		super.new(.w(a), .h(b));
+	endfunction : new
 	
 	function real get_area();
 		return width * height;
@@ -41,12 +38,11 @@ class square extends rectangle;
 	endfunction : print
 endclass : square
 
-class triangle extends shape;
+class triangle extends rectangle;
 	
 	function new(real a, real h);
-		width = a;
-		height = h;
-	endfunction: new 
+		super.new(.a(a), .b(h));
+	endfunction : new
 	
 	function real get_area();
 		return width * height/2;
