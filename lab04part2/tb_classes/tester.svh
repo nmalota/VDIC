@@ -7,7 +7,7 @@ class tester;
 //---------------------------------
 // Random data generation functions
 //---------------------------------
-	function operation_t get_op();
+	protected function operation_t get_op();
 		bit [2:0] op_choice;
 		op_choice = 3'($random);
 		case (op_choice)
@@ -23,7 +23,7 @@ class tester;
 	endfunction : get_op
 
 //------------------------------------------------------------------
-	function bit [31:0] get_data();
+	protected function bit [31:0] get_data();
 		bit [1:0] zero_ones;
 		zero_ones = 2'($random);
 		if (zero_ones == 2'b00)
@@ -34,7 +34,7 @@ class tester;
 			return 32'($random);
 	endfunction : get_data
 	
-	function bit [2:0] get_len();
+	protected function bit [2:0] get_len();
 		bit correct;
 		correct = 1'($random);
 		if (correct)
@@ -43,7 +43,7 @@ class tester;
 			return {1'b0, 2'($random)};
 	endfunction : get_len
 	
-	function bit [3:0] get_crc();
+	protected function bit [3:0] get_crc();
 		bit correct;
 		correct = 1'($random);
 		if (correct)

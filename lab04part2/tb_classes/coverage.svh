@@ -3,9 +3,9 @@ class coverage;
 	virtual alu_bfm bfm;
 
 	
-	bit         [31:0]  A;
-	bit         [31:0]  B;
-	operation_t         op_set;
+	protected bit         [31:0]  A;
+	protected bit         [31:0]  B;
+	protected operation_t         op_set;
 	
 	covergroup op_cov;
 

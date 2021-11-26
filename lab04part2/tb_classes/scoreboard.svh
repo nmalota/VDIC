@@ -5,11 +5,11 @@ class scoreboard;
 		bfm = b;
 	endfunction : new
 	
-	string test_result = "PASSED";
-	bit expected_err_data;
-	bit expected_err_op;
+	protected string test_result = "PASSED";
+	protected bit expected_err_data;
+	protected bit expected_err_op;
 //------------------------------------------------------------------------------
-	function bit [31:0] get_expected(
+	protected function bit [31:0] get_expected(
 			bit [31:0] A,
 			bit [31:0] B,
 			operation_t op_set
@@ -33,7 +33,7 @@ class scoreboard;
 		return(ret);
 	endfunction
 //------------------------------------------------------
-	function void get_expected_error(
+	protected function void get_expected_error(
 			bit [31:0] A,
 			bit [31:0] B,
 			bit [2:0] A_len,
