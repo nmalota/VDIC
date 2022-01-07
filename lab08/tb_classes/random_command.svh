@@ -57,3 +57,52 @@ class random_command extends uvm_transaction;
 endclass : random_command
 
 
+	function void random_command::do_copy(uvm_object rhs);
+		random_command copied_transaction_h;
+
+		if(rhs == null)
+			`uvm_fatal("COMMAND TRANSACTION", "Tried to copy from a null pointer")
+
+		super.do_copy(rhs); // copy all parent class data
+
+		if(!$cast(copied_transaction_h,rhs))
+			`uvm_fatal("COMMAND TRANSACTION", "Tried to copy wrong type.")
+
+		A  = copied_transaction_h.A;
+		B  = copied_transaction_h.B;
+		op_set = copied_transaction_h.op_set;
+		A_len = copied_transaction_h.A_len;
+		B_len = copied_transaction_h.B_len;
+		CRC_in = copied_transaction_h.CRC_in;
+
+	endfunction : do_copy
+
+
+	function bit random_command::do_compare(uvm_object rhs, uvm_comparer comparer);
+
+		random_command compared_transaction_h;
+		bit same;
+
+		if (rhs==null) `uvm_fatal("RANDOM TRANSACTION",
+				"Tried to do comparison to a null pointer");
+
+		if (!$cast(compared_transaction_h,rhs))
+			same = 0;
+		else
+			same = super.do_compare(rhs, comparer) &&
+			(compared_transaction_h.A == A) &&
+			(compared_transaction_h.B == B) &&			
+			(compared_transaction_h.A_len == A_len) &&
+			(compared_transaction_h.B_len == B_len) &&
+			(compared_transaction_h.CRC_in == CRC_in) &&
+			(compared_transaction_h.op_set == op_set);
+		return same;
+
+	endfunction : do_compare
+
+
+	function string random_command::convert2string();
+		string s;
+		s = $sformatf("A: %8h  B: %8h A_len: %h B_len: %h CRC_in: %h op_set: %s", A, B, A_len, B_len, CRC_in, op_set.name());
+		return s;
+	endfunction : convert2string

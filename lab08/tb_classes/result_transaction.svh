@@ -41,3 +41,41 @@ class result_transaction extends uvm_transaction;
     extern function string convert2string();
 
 endclass : result_transaction
+
+    function void result_transaction::do_copy(uvm_object rhs);
+        result_transaction copied_transaction_h;
+        assert(rhs != null) else
+            `uvm_fatal("RESULT TRANSACTION","Tried to copy null transaction");
+        super.do_copy(rhs);
+        assert($cast(copied_transaction_h,rhs)) else
+            `uvm_fatal("RESULT TRANSACTION","Failed cast in do_copy");
+        C 				 = copied_transaction_h.C;
+        FLAGS 			 = copied_transaction_h.FLAGS;
+        CRC 			 = copied_transaction_h.CRC;
+        ERROR 			 = copied_transaction_h.ERROR;
+        expected_err_crc = copied_transaction_h.expected_err_crc;
+    endfunction : do_copy
+
+    function string result_transaction::convert2string();
+        string s;
+        s = $sformatf("C: %8h, FLAGS: %h, CRC: %h, ERROR: %h, expected_err_crc: %h ", C, FLAGS, CRC,ERROR,expected_err_crc);
+        return s;
+    endfunction : convert2string
+
+    function bit result_transaction::do_compare(uvm_object rhs, uvm_comparer comparer);
+        result_transaction RHS;
+        bit same;
+        assert(rhs != null) else
+            `uvm_fatal("RESULT TRANSACTION","Tried to compare null transaction");
+
+        same = super.do_compare(rhs, comparer);
+
+        $cast(RHS, rhs);
+        same = (C  == RHS.C) && 
+        (ERROR == RHS.ERROR) &&
+//        (CRC == RHS.CRC) &&
+//        (expected_err_crc == RHS.expected_err_crc) &&
+//        (FLAGS == RHS.FLAGS) &&
+        same;
+        return same;
+    endfunction : do_compare

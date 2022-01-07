@@ -55,30 +55,34 @@ module alu_tester_module(alu_bfm bfm);
 			return {1'b0, 2'($random)};
 	endfunction : get_len
 //------------------------------------------------------------------
-	function bit [3:0] get_crc();
+	function bit [3:0] get_crc(bit [31:0] A, bit [31:0] B, operation_t op_set);
 		bit correct;
 		correct = 1'($random);
 		if (correct)
-			return nextCRC4_D68({B,A,1'b1,op},0);
+			return nextCRC4_D68({B,A,1'b1,op_set},0);
 		else
 			return 4'($random);
 	endfunction : get_crc
 
-	initial begin
-		byte         unsigned        iA;
-		byte         unsigned        iB;
-		operation_t                  op_set;
-		shortint     result;
+//------------------------------------------------------------------------------
+// Tester main
 
+	initial begin : tester
+		ALU_in_t ALU_in;
 		bfm.reset_alu();
-		repeat (1000) begin : random_loop
-			op_set = get_op();
-			iA = get_data();
-			iB = get_data();
-			bfm.send_op(iA, iB, op_set,result);
-		end : random_loop
-	end // initial begin
-endmodule : tinyalu_tester_module
+		repeat (10000) begin : tester_main
+			@(negedge bfm.clk);
+			ALU_in.A = get_data();
+			ALU_in.B = get_data();
+			ALU_in.A_len = get_len();
+			ALU_in.B_len = get_len();
+			ALU_in.op_set = get_op();
+			ALU_in.CRC_in = get_crc(ALU_in.A, ALU_in.B, ALU_in.op_set);
+			
+			bfm.send_op(ALU_in);
+		end
+	end
+endmodule : alu_tester_module
 
 
 
