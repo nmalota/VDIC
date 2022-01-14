@@ -13,6 +13,27 @@ class scoreboard extends uvm_subscriber#(ALU_out_t);
 	function new (string name, uvm_component parent);
 		super.new(name, parent);
 	endfunction : new
+//------------------------------------------------------------------------------
+// print the PASSED/FAILED in color
+//------------------------------------------------------------------------------
+    protected function void print_test_result (test_result r);
+        if(tr == TEST_PASSED) begin
+            set_print_color(COLOR_BOLD_BLACK_ON_GREEN);
+            $write ("-----------------------------------\n");
+            $write ("----------- Test PASSED -----------\n");
+            $write ("-----------------------------------");
+            set_print_color(COLOR_DEFAULT);
+            $write ("\n");
+        end
+        else begin
+            set_print_color(COLOR_BOLD_BLACK_ON_RED);
+            $write ("-----------------------------------\n");
+            $write ("----------- Test FAILED -----------\n");
+            $write ("-----------------------------------");
+            set_print_color(COLOR_DEFAULT);
+            $write ("\n");
+        end
+    endfunction
 
 
 	function void build_phase(uvm_phase phase);

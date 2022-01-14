@@ -2,6 +2,7 @@
 *.history
 *.key
 *.rpt
+*.err
 INCA_libs_gui/
 INCA_libs/
 waves.shm/
@@ -12,3 +13,5 @@ cov_work/
 OK
 .project
 .reinvoke.sim
+.bpad/
+

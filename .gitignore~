@@ -1,6 +1,7 @@
 *.log
 *.history
 *.key
+*.rpt
 INCA_libs_gui/
 INCA_libs/
 waves.shm/
